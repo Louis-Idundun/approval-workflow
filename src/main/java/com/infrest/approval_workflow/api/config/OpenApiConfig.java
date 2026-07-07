@@ -1,0 +1,19 @@
+package com.infrest.approval_workflow.api.config;
+
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class OpenApiConfig {
+
+    @Bean
+    public OpenAPI approvalWorkflowOpenAPI() {
+        return new OpenAPI()
+            .info(new Info()
+                .title("Approval Workflow Service")
+                .description("Multi-level approval workflow engine for departmental requests")
+                .version("1.0"));
+    }
+}

@@ -1,4 +1,4 @@
-package com.infrest.approval_workflow.domain.model.enums;
+package com.infrest.approval_workflow.domain.enums;
 
 public enum RequestStatus {
     PENDING,

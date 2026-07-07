@@ -3,9 +3,12 @@ spring:
     name: approval-workflow
 
   datasource:
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+#    url: ${DB_URL}
+    url: jdbc:postgresql://localhost:5432/approval-workflow
+#    username: ${DB_USERNAME}
+    username: postgres
+#    password: ${DB_PASSWORD}
+    password: @Luweezy360#
     driver-class-name: org.postgresql.Driver
 
   jpa:

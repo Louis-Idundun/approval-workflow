@@ -1,6 +1,6 @@
 package com.infrest.approval_workflow.domain.model;
 
-import com.infrest.approval_workflow.domain.model.enums.RequestStatus;
+import com.infrest.approval_workflow.domain.enums.RequestStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
