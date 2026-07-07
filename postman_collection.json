@@ -1,0 +1,155 @@
+{
+  "info": {
+    "name": "Approval Workflow Service",
+    "description": "Collection for the multi-level approval workflow API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ],
+  "item": [
+    {
+      "name": "Create Department",
+      "event": [],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Engineering\",\n  \"code\": \"ENG\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/departments",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "departments"]
+        }
+      }
+    },
+    {
+      "name": "Create Workflow Template",
+      "event": [],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Engineering Review\",\n  \"steps\": [\n    {\n      \"stepOrder\": 1,\n      \"approverEmail\": \"tech-lead@example.com\",\n      \"approverRole\": \"Tech Lead\"\n    },\n    {\n      \"stepOrder\": 2,\n      \"approverEmail\": \"engineering-manager@example.com\",\n      \"approverRole\": \"Engineering Manager\"\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/departments/1/templates",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "departments", "1", "templates"]
+        }
+      }
+    },
+    {
+      "name": "Activate Template",
+      "event": [],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/departments/1/templates/1/activate",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "departments", "1", "templates", "1", "activate"]
+        }
+      }
+    },
+    {
+      "name": "Submit Approval Request",
+      "event": [],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"New Feature Approval\",\n  \"description\": \"Requesting approval for the new dashboard feature\",\n  \"submittedBy\": \"developer@example.com\",\n  \"departmentId\": 1\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/requests",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "requests"]
+        }
+      }
+    },
+    {
+      "name": "Approve Level 1",
+      "event": [],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"approverEmail\": \"tech-lead@example.com\",\n  \"action\": \"APPROVE\",\n  \"comment\": \"Looks good, proceeding\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/requests/1/action",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "requests", "1", "action"]
+        }
+      }
+    },
+    {
+      "name": "Approve Level 2 (Full Approval)",
+      "event": [],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"approverEmail\": \"engineering-manager@example.com\",\n  \"action\": \"APPROVE\",\n  \"comment\": \"Approved\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/requests/1/action",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "requests", "1", "action"]
+        }
+      }
+    },
+    {
+      "name": "Get Request by ID",
+      "event": [],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/requests/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "requests", "1"]
+        }
+      }
+    },
+    {
+      "name": "Reject a Request",
+      "event": [],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"approverEmail\": \"tech-lead@example.com\",\n  \"action\": \"REJECT\",\n  \"comment\": \"Not ready for approval\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/requests/2/action",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "requests", "2", "action"]
+        }
+      }
+    }
+  ]
+}
